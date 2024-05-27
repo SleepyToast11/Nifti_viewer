@@ -40,6 +40,7 @@ void MRIWindow::threadWorker(int width, int height, std::string windowName) {
     sf::RectangleShape xIndicator;
     sf::RectangleShape yIndicator;
 
+    /*
     xIndicator.setSize(sf::Vector2f(1, height));
     xIndicator.setFillColor(sf::Color::Blue);
     xIndicator.setPosition(0, 0);
@@ -47,7 +48,7 @@ void MRIWindow::threadWorker(int width, int height, std::string windowName) {
     yIndicator.setSize(sf::Vector2f(width, 1));
     yIndicator.setFillColor(sf::Color::Blue);
     yIndicator.setPosition(0, 0);
-
+    */
     int sliceNum;
     if(!niftiData->getNumOfSlice(sliceType, sliceNum))
         goto closeWindow;
