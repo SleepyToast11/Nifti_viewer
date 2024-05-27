@@ -58,7 +58,7 @@ unsigned char niftiWrapper::normalize(void *value, int index) const {
             break;
         case 4: // DT_INT16
             shortData = (short*) value;
-            result = ((int) shortData[index] + 32767 / 2) / 32767;
+            result = (((int) shortData[index])) / 128;
             break;
         case 8: // DT_INT32
             intData = (int*) value;
@@ -111,7 +111,7 @@ size_t niftiWrapper::sizeOfDatatype() const{
             bytes = sizeof(int32_t);
             break;
         case 16: // DT_FLOAT32
-            bytes = sizeof(float);
+            bytes = sizeof(int32_t);
             break;
         case 64: // DT_FLOAT64
             bytes = sizeof(double);
@@ -204,8 +204,8 @@ bool niftiWrapper::toImage(int sliceNum, int sliceTime, SliceType type, sf::Imag
     imageRet.create(imageWidth, imageHeight);
 
     unsigned char normalizedCollapsedImage[imageWidth * imageHeight];
-
-    for (int i = 0; i < collapsedImageBytes / sizeOfDatatype(); ++i) {
+    int i;
+    for (i = 0; i < collapsedImageBytes / sizeOfDatatype(); ++i) {
         normalizedCollapsedImage[i] = normalize(data, i);
     }
 
@@ -262,6 +262,7 @@ bool niftiWrapper::getSizeOfSlice(SliceType type, int &retWidth, int &retHeight)
 
 
 bool niftiWrapper::imageValid() const{
+
     return image != NULL;
 }
 
